@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class JokeResourceTest {
 
     @Test
-    public void tesJokes() {
+    public void findAll() {
         given()
           .when().get("/jokes")
           .then()
