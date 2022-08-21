@@ -6,18 +6,18 @@ metadata:
     app.quarkus.io/commit-id: 57ec12ccd6cda13fcdbc788254ab504e53620306
     app.quarkus.io/build-timestamp: 2022-04-29 - 11:03:42 +0000
   labels:
-    app.kubernetes.io/name: another-greeting-app
+    app.kubernetes.io/name: joker
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
-  name: another-greeting-app
+  name: joker
 spec:
   ports:
     - name: http
       port: 80
       targetPort: 8080
   selector:
-    app.kubernetes.io/name: another-greeting-app
+    app.kubernetes.io/name: joker
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
-  type: ClusterIP
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -26,14 +26,14 @@ metadata:
     app.quarkus.io/commit-id: 57ec12ccd6cda13fcdbc788254ab504e53620306
     app.quarkus.io/build-timestamp: 2022-04-29 - 11:03:42 +0000
   labels:
-    app.kubernetes.io/name: another-greeting-app
+    app.kubernetes.io/name: joker
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
-  name: another-greeting-app
+  name: joker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: another-greeting-app
+      app.kubernetes.io/name: joker
       app.kubernetes.io/version: 1.0.0-SNAPSHOT
   template:
     metadata:
@@ -41,7 +41,7 @@ spec:
         app.quarkus.io/commit-id: 57ec12ccd6cda13fcdbc788254ab504e53620306
         app.quarkus.io/build-timestamp: 2022-04-29 - 11:03:42 +0000
       labels:
-        app.kubernetes.io/name: another-greeting-app
+        app.kubernetes.io/name: joker
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
     spec:
       containers:
@@ -64,7 +64,7 @@ spec:
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
-          name: another-greeting-app
+          name: joker
           ports:
             - containerPort: 8080
               name: http
@@ -82,10 +82,10 @@ spec:
           resources:
             limits:
               cpu: 200m
-              memory: 280Mi
+              memory: 300Mi
             requests:
               cpu: 100m
-              memory: 280Mi
+              memory: 300Mi
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -94,16 +94,16 @@ metadata:
     app.quarkus.io/commit-id: 60900d64d6f92af9e666b49e589016e50d1d238d
     app.quarkus.io/build-timestamp: 2022-06-20 - 09:20:48 +0000
   labels:
-    app.kubernetes.io/name: another-greeting-app
+    app.kubernetes.io/name: joker
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
-  name: another-greeting-app
+  name: joker
 spec:
   rules:
     - http:
         paths:
           - backend:
               service:
-                name: another-greeting-app
+                name: joker
                 port:
                   name: http
             path: /
