@@ -1,6 +1,7 @@
 package org.acme.example;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.jboss.resteasy.reactive.RestQuery;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,11 +15,11 @@ public interface JokeService {
     @GET
     @Path("Any")
     @Produces(MediaType.APPLICATION_JSON)
-    FunnyStory getAnyContent(@QueryParam("lang") String lang, @QueryParam("contains") String contains);
+    FunnyStory getAnyContent(@RestQuery("lang") String lang, @RestQuery("contains") String contains);
 
     @GET
     @Path("{category}")
     @Produces(MediaType.APPLICATION_JSON)
-    FunnyStory getContent(@PathParam("category") String category, @QueryParam("lang") String language);
+    FunnyStory getContent(@RestQuery("category") String category, @RestQuery("lang") String language);
 
 }
