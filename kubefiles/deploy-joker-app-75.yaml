@@ -52,7 +52,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: JDK_JAVA_OPTIONS
               value: "-XshowSettings:system -Xlog:gc=info -Xlog:os+container=info -XX:MaxRAMPercentage=75"
-          image: quay.io/rhdevelopers/joker:1.0.0-SNAPSHOT
+          image: ammbra/joker:1.0.0-SNAPSHOT
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -81,10 +81,9 @@ spec:
             timeoutSeconds: 10
           resources:
             limits:
-              cpu: 200m
               memory: 300Mi
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 300Mi
 ---
 apiVersion: networking.k8s.io/v1

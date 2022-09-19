@@ -46,7 +46,8 @@ public class PodDisruptionBudgetTest {
 
     @Test
     public void testCustomYAMLInput() throws URISyntaxException, FileNotFoundException {
-        assertThrows(KubernetesClientException.class, () ->  mockKubernetes.getClient().policy().v1()
-                .podDisruptionBudget().load(flavoredInput).dryRun()) ;
+        assertThrows(KubernetesClientException.class,
+                     () ->  mockKubernetes.getClient().policy().v1()
+                                .podDisruptionBudget().load(flavoredInput).dryRun()) ;
     }
 }

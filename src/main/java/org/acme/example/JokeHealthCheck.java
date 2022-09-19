@@ -11,7 +11,7 @@ import javax.ws.rs.HttpMethod;
 @ApplicationScoped
 public class JokeHealthCheck {
 
-    @ConfigProperty(name = "org.acme.example.JokeService/mp-rest/url")
+    @ConfigProperty(name = "quarkus.rest-client.joker-https.url")
     String externalURL;
 
     @Readiness
