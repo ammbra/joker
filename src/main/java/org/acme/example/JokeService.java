@@ -7,7 +7,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.inject.Singleton;
 
-@RegisterRestClient
+@RegisterRestClient(configKey = "joker-https")
 @Singleton
 @Path("joke")
 public interface JokeService {

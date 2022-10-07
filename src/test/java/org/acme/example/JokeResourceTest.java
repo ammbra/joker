@@ -1,4 +1,5 @@
 package org.acme.example;
+
 import io.quarkus.test.junit.QuarkusTest;
 
 import org.junit.jupiter.api.Test;
@@ -12,10 +13,10 @@ public class JokeResourceTest {
     @Test
     public void findAll() {
         given()
-                .when().get("/jokes")
-                .then()
-                .statusCode(200)
-                .body(notNullValue());
+          .when().get("/jokes")
+          .then()
+             .statusCode(200)
+             .body(notNullValue());
     }
 
 }

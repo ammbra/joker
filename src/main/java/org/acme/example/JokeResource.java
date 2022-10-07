@@ -1,6 +1,5 @@
 package org.acme.example;
 
-import io.micrometer.core.annotation.Timed;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.reactive.RestResponse.Status;
@@ -21,20 +20,17 @@ import java.util.List;
 public class JokeResource {
 
     @Inject
-    Logger LOGGER;
+    Logger logger;
 
     @RestClient
     JokeService jokeService;
-
-    public static final String URL = "url";
-    public static final String API_JOKE = "api.joke";
 
     @Path("init")
     @GET
     @Transactional
     @Produces(MediaType.TEXT_PLAIN)
     public Response init() {
-        LOGGER.debug("Updating the db from external service");
+        logger.debug("Updating the db from external service");
         List<Joke> jokes = Joke.find("merged", false).list();
         for (Joke joke : jokes) {
             String language = joke.language;
@@ -43,7 +39,7 @@ public class JokeResource {
             String content = (anyContent.joke() != null) ? anyContent.joke() : anyContent.setup() + anyContent.delivery();
             joke.update(content, joke.id, language);
         }
-        LOGGER.debug("End update of the db");
+        logger.debug("End update of the db");
 
         return Response.status(Status.CREATED).entity("DB initialized").build();
 
@@ -51,7 +47,6 @@ public class JokeResource {
 
     @POST
     @Transactional
-    @Timed(value = "joke.creation", longTask = true, extraTags = {URL, API_JOKE})
     public Joke create(Joke joke) {
          Joke.persist(joke);
          return joke;
